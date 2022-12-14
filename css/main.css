@@ -1,0 +1,132 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.block_off {
+    display: none;
+}
+
+.error {
+    border-bottom: 2px solid #e40000;
+}
+.done {
+    color:rgb(0, 187, 93);
+}
+
+body {
+    padding: 50px 0;
+    font-family: Montserrat, sans-serif;
+    text-align: center;
+}
+
+.nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+}
+.nav ul li {
+    margin: 0 20px;
+}
+.nav ul li a {
+    text-decoration: none;
+    font-weight: 700;
+    color: rgb(0, 130, 190);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+.nav ul li:last-child a {
+    color: rgb(108, 19, 250);
+}
+.nav ul li:last-child a:hover {
+    background-color: rgb(114, 56, 207);
+    color: aliceblue;
+}
+.nav ul li a:hover {
+    background-color: rgb(20, 153, 214);
+    color: aliceblue;
+}
+
+h1, h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+}
+.title_name {
+    color: rgb(0, 187, 93);
+    padding: 0 5px;
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin-bottom: 10px;
+}
+.form_prof {
+    flex-direction: column;
+}
+form {
+    width: 400px;
+    margin: 0 auto;
+}
+form input {
+    display: block;
+    width: 80%;
+    margin: 10px auto;
+    padding: 10px;
+    border: unset;
+    border-bottom: 2px solid #e3e3e3;
+    outline: none;
+}
+.btn {
+    margin: 5px 0;
+    width: 80%;
+    font-weight: bold;
+    border: unset;
+    padding: 10px;
+    cursor: pointer;
+}
+.btn:active {
+    background-color: rgba(117, 195, 247, 0.863);
+    color: aliceblue;
+}
+.deleted_btn {
+    text-decoration: none;
+    display: block;
+    width: 80%;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #e3e3e3;
+    border-radius: 3px;
+    color: #d42626;
+    
+}
+.deleted_btn:active {
+    background-color: #e40000;
+    color: #fff;
+}
+
+label {
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    color: #e44800;
+    width: 100%;
+}
+
+.link{
+    margin: 10px 0;
+    text-align: center;
+}
+
+.msg {
+    border: 2px solid #ffb039;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    font-weight: 700;
+}
