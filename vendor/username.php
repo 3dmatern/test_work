@@ -1,6 +1,6 @@
 <?php
     session_start();
-    /* Подключаем файлы с функцией checkName */
+    /* Подключаем файл с функцией checkName */
     require_once('../function/checkName.php');
     
     /* Проверка Ajax ли запрос */
@@ -16,8 +16,6 @@
             echo json_encode($response);
             die();
         }
-        /* удаляем класс */
-        $user -> __destruct();
     } else {
         die('Это не ajax запрос!');
     }
