@@ -5,7 +5,6 @@
         require_once('../'.$className.'.class.php');
     }
     spl_autoload_register('my_autoload');
-    $user = new User();
 
     /* Подключаем файл с функцией salt */
     require_once('../function/salt.php');
@@ -221,7 +220,7 @@
             $password = md5($salt.trim(htmlspecialchars($_POST['password'])));
             
             /* заносим данные в vendor/db.json */
-            $user -> create($login, $password, $salt, $email, $name);
+            $user = (new User($login, $password, $email, $name))->create($salt);
             $response = [
                 "status" => true,
                 "type" => 1,
