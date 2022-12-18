@@ -49,5 +49,6 @@
 
     <script src="js/jquery-3.6.1.min.js"></script>
     <script src="js/ajax.js"></script>
+    <script src="js/ajax_profile.js"></script>
 </body>
 </html>
