@@ -6,7 +6,6 @@
         require_once('../'.$className.'.class.php');
     }
     spl_autoload_register('my_autoload');
-    $user = new User();
 
     /* переменная $error_fields в которую будут помещаться данные с ошибками и с помощью 
     jQuery будет активироваться lable относящийся к inputu в котором ошибка */
@@ -41,7 +40,7 @@
                 die();
             }
             $name = htmlspecialchars($_POST['name']);
-            $user -> update($login, $name);
+            $user = (new User($login))->update($name);
             $response = [
                 "status" => true,
                 "type" => 1,
