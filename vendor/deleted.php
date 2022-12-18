@@ -6,13 +6,12 @@
         require_once('../'.$className.'.class.php');
     }
     spl_autoload_register('my_autoload');
-    $user = new User();
 
     /* Проверка Ajax ли запрос */
     if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
         if($_POST['login']===''){
             $login = $_SESSION['login'];
-            $user -> deleted($login);
+            $user = (new User($login))->deleted();
             if(isset($_COOKIE)){
                 setcookie('name', '', 1, '/');
             }
