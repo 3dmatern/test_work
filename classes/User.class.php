@@ -10,20 +10,19 @@
         private $name;
 
         //конструктор - метод который создаёт объект (экземпляр класса)
-        public function __construct($login=false, $email=false, $name=false, $password=false){
+        public function __construct($login=false, $password=false, $email=false, $name=false){
             $this -> login = $login;
+            $this -> password = $password;
             $this -> email = $email;
             $this -> name = $name;
-            $this -> password = $password;
-            
         }
         //Создание записи в БД, если проверка пройдена
-        public function create($login=false, $password=false, $salt=false, $email=false, $name=false){
+        public function create($salt){
             if(file_exists('db.json')){
                 $json = file_get_contents('db.json');
                 $jsonArray = json_decode($json, true);
-                if($login && $password && $salt && $email && $name){
-                    $user = [$login, $password, $salt, $email, $name];
+                if($this -> login && $this -> password && $salt && $this -> email && $this -> name){
+                    $user = [$this -> login, $this -> password, $salt, $this -> email, $this -> name];
                     $jsonArray[] = $user;
                     file_put_contents('db.json', json_encode($jsonArray, JSON_FORCE_OBJECT | JSON_UNESCAPED_UNICODE));
                 }
@@ -56,13 +55,14 @@
             }
         }
         //Обновление данных пользователя
-        public function update($login=false, $update=false, $salt=false){
+        public function update($update, $salt=false){
             if(file_exists('db.json')){
                 $json = file_get_contents('db.json');
                 $jsonArray = json_decode($json, true);
             }
             for($i=0, $size=count($jsonArray); $i<$size; $i++){
-                if($jsonArray[$i][0] === $login){
+                if($jsonArray[$i][0] === $this -> login){
+                    //проверяем $update на соответствие паролю
                     if(preg_match("/^(?=.*\d)(?=.*[a-zа-я])(?=.*[A-ZА-Я])[0-9a-zA-Zа-яА-Я]{6,}$/iu", $update) === 1){
                         $jsonArray[$i][1] = $update;
                         $jsonArray[$i][2] = $salt;
@@ -71,6 +71,7 @@
                             return 1;
                         }
                     }
+                    //проверяем $update на соответствие имени
                     if(preg_match("/^[a-zа-я]+$/iu", $update) === 1){
                         $jsonArray[$i][4] = $update;
                         if($jsonArray[$i][4] === $update){
@@ -82,13 +83,13 @@
             }
         }
         //Удаление пользователя
-        public function deleted($login=false){
+        public function deleted(){
             if(file_exists('db.json')){
                 $json = file_get_contents('db.json');
                 $jsonArray = json_decode($json, true);
             }
             for($i=0, $size=count($jsonArray); $i<$size; $i++){
-                if($jsonArray[$i][0] === $login){
+                if($jsonArray[$i][0] === $this->login){
                     unset($jsonArray[$i]);
                 }
             }
