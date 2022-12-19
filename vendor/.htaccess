@@ -1,0 +1,8 @@
+#Устанавливаем кодировку
+AddDefaultCharset UTF-8
+
+#Запрет просмотра файла
+<Files db.json>
+  Order allow,deny
+  Deny from all
+</Files>
