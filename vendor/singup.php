@@ -2,7 +2,7 @@
     //Подключаем класс
     use classes\User;
     function my_autoload($className){
-        require_once('../'.$className.'.class.php');
+        require_once('..\\'.$className.'.class.php');
     }
     spl_autoload_register('my_autoload');
 
