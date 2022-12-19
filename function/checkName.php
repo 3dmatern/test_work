@@ -3,14 +3,12 @@
     {
         $json = file_get_contents('../vendor/db.json');
         $jsonArray = json_decode($json, true);
-        $i = -1;
-        $count=count($jsonArray);
-        while($i<$count){
-            $i++;
-            $result = $jsonArray[$i][0];
-            if($result === $login){
-                $name = $jsonArray[$i][4];
-                return $name;
+        foreach($jsonArray as $key => $value){
+            for($i=0, $count=count($jsonArray); $i<$count; $i++){
+                if($value[$i] === $login){
+                    $name = $value[4];
+                    return $name;
+                }
             }
         }
     }
