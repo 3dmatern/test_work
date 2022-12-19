@@ -1,9 +1,8 @@
 <?php
     session_start();
     //Подключаем класс
-    use classes\User;
-    function my_autoload($className){
-        require_once('../'.$className.'.class.php');
+    function my_autoload($classname){
+        require_once("..\\classes\\{$classname}.class.php");
     }
     spl_autoload_register('my_autoload');
 
