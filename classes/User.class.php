@@ -1,5 +1,4 @@
 <?php
-    namespace classes;
     //Объект Пользователь
     class User{
 
@@ -60,23 +59,25 @@
                 $json = file_get_contents('db.json');
                 $jsonArray = json_decode($json, true);
             }
-            for($i=0, $size=count($jsonArray); $i<$size; $i++){
-                if($jsonArray[$i][0] === $this -> login){
-                    //проверяем $update на соответствие паролю
-                    if(preg_match("/^(?=.*\d)(?=.*[a-zа-я])(?=.*[A-ZА-Я])[0-9a-zA-Zа-яА-Я]{6,}$/iu", $update) === 1){
-                        $jsonArray[$i][1] = $update;
-                        $jsonArray[$i][2] = $salt;
-                        if($jsonArray[$i][1] === $update && $jsonArray[$i][2] === $salt){
-                            file_put_contents('db.json', json_encode($jsonArray, JSON_FORCE_OBJECT));
-                            return 1;
+            foreach($jsonArray as $key => $value){
+                for($i=0, $size=count($jsonArray); $i<$size; $i++){
+                    if($value[$i] === $this -> login){
+                        //проверяем $update на соответствие паролю
+                        if(preg_match("/^(?=.*\d)(?=.*[a-zа-я])(?=.*[A-ZА-Я])[0-9a-zA-Zа-яА-Я]{6,}$/iu", $update) === 1){
+                            $jsonArray[$key][1] = $update;
+                            $jsonArray[$key][2] = $salt;
+                            if($jsonArray[$key][1] === $update && $jsonArray[$key][2] === $salt){
+                                file_put_contents('db.json', json_encode($jsonArray, JSON_FORCE_OBJECT));
+                                return 1;
+                            }
                         }
-                    }
-                    //проверяем $update на соответствие имени
-                    if(preg_match("/^[a-zа-я]+$/iu", $update) === 1){
-                        $jsonArray[$i][4] = $update;
-                        if($jsonArray[$i][4] === $update){
-                            file_put_contents('db.json', json_encode($jsonArray, JSON_FORCE_OBJECT));
-                            return 2;
+                        //проверяем $update на соответствие имени
+                        if(preg_match("/^[a-zа-я]+$/iu", $update) === 1){
+                            $jsonArray[$key][4] = $update;
+                            if($jsonArray[$key][4] === $update){
+                                file_put_contents('db.json', json_encode($jsonArray, JSON_FORCE_OBJECT));
+                                return 2;
+                            }
                         }
                     }
                 }
@@ -88,12 +89,14 @@
                 $json = file_get_contents('db.json');
                 $jsonArray = json_decode($json, true);
             }
-            for($i=0, $size=count($jsonArray); $i<$size; $i++){
-                if($jsonArray[$i][0] === $this->login){
-                    unset($jsonArray[$i]);
+            foreach($jsonArray as $key => $value){
+                for($i=0, $count=count($jsonArray); $i<$count; $i++){
+                    if($value[$i] === $this->login){
+                        unset($jsonArray[$key]);
+                    }
                 }
+                file_put_contents('db.json', json_encode($jsonArray, JSON_FORCE_OBJECT));
             }
-            file_put_contents('db.json', json_encode($jsonArray, JSON_FORCE_OBJECT));
         }
         //Удаляем класс
         public function __destruct()
