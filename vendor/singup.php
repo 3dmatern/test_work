@@ -1,7 +1,7 @@
 <?php
     //Подключаем класс
     function my_autoload($classname){
-        require_once("..\\classes\\{$classname}.class.php");
+        require_once("../classes/{$classname}.class.php");
     }
     spl_autoload_register('my_autoload');
     $user = new User();
